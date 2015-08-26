@@ -8,7 +8,7 @@ I am currently a student in THU, my search interests are computer vision and mac
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+My Chinese blog is: http://www.cnblogs.com/sunshineatnoon/
 
 ### Contact me
 
