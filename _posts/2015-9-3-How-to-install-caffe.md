@@ -48,19 +48,22 @@ Since I don't have a Navidia GPU so I will only use the CPU mode to compile and 
 
         CPU_ONLY := 1
 
-But if the make command tells you that it can't find some dependencies, a convinient(maybe not best) way is to find out where dependencies are and add their paths to the INCLUDE_DIRS and LIBRARY_DIRS, I used this to solve a lot of missing dependencies on CentOS.
+But if the make command tells you that it can't find some dependencies, a convinient (maybe not best) way is to find out where dependencies are and add their paths to the INCLUDE_DIRS and LIBRARY_DIRS, I used this to solve a lot of missing dependencies complaints on CentOS.
 
         # Whatever else you find you need goes here.
         INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
         LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib
 
 Next, we come the exciting part, compiling caffe, just enter make all to compile it:
+
         make all
 
 If you are lucky and get no errors, we can make the tests:
+
         make test
 
 Again, if no errors pop out, we run the test to see if everything is installed correctly:
+
         make runtest
 
 If you saw the image below, congratulations! You have caffe installed properly!
@@ -74,10 +77,12 @@ A quick start with caffe is to run mnist using caffe since this data set is smal
         ./data/mnist/get_mnist.sh
         ./examples/mnist/create_mnist.sh
         
-Since I only use CPU here, I need to change solver_mode in caffe/examples/mnist/lenet_solver.prototxt to solver_mode: CPU. 
+Since I only use CPU here, I need to change solver_mode in caffe/examples/mnist/lenet_solver.prototxt to solver_mode: CPU.
+
         solver_mode: CPU
         
 Then we start to train lenet model:
+
         ./examples/mnist/train_lenet.sh
         
 This will take quiet a while. You can take the time to install the python interface in another terminal. After the training, I got nearly 99.06% accuracy as below.
