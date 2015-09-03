@@ -63,5 +63,5 @@ Again, if no errors pop out, we run the test to see if everything is installed c
 
 If you saw the image below, congratulations! You have caffe installed properly!
 
-![successfully running tests]({{site.baseurl}}/_posts/runtest success.png)
+![alt text](https://github.com/sunshineatnoon/sunshineatnoon.github.io/blob/master/_posts/runtest%20success.png "successfully running all tests")
 
