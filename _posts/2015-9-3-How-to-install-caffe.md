@@ -121,6 +121,7 @@ This will take quiet a while. You can take the time to install the python interf
 
 ## Reference:
 [1] [caffe Ubuntu installation guide page][4]
+
 [2] [caffe lenet training guide page][5]
 
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/runtest-success.png
