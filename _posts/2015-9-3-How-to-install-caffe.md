@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to install caffe on ubuntu 14.04(without GPU) and python interface
+title: How to install caffe on ubuntu 14.04(without GPU)
 published: true
 ---
 
@@ -69,48 +69,6 @@ Git might be the easiest way to download caffe. Of course you will first apt-get
 
 ![runtest-success][1]
 
-## Compile python interface for caffe
-
-Python is easy and convinient, especially when you want to use caffe for some projects. In order to use the python interface of caffe, we need to compile it. All the commands below are supposed to be done in the caffe root directory.
-
-1.  First make sure you get python in your system. By simply running the command python, you can check if you have python installed.
-2.  Next, we need to install [Pip][3]. Pip is a package management system used to install and manage software packages written in Python. On ubuntu, just use apt-get to install it and <b>update it</b>,updating pip is important. Before I update, I have many errors when trying to use pip to install softwares:
-   
-        sudo apt-get install python-pip python-dev build-essential 
-        sudo pip install --upgrade pip
-3.  Then we can use pip to install all the essential requirements in order to compile the python interface:
-   
-        sudo pip install -r ./python/requirements.txt
-    When taking a further look into the requirements.txt file, the command above installs these packages:
-
-        Cython>=0.19.2
-        numpy>=1.7.1
-        scipy>=0.13.2
-        scikit-image>=0.9.3
-        matplotlib>=1.3.1
-        ipython>=3.0.0
-        h5py>=2.2.0
-        leveldb>=0.191
-        networkx>=1.8.1
-        nose>=1.3.0
-        pandas>=0.12.0
-        python-dateutil>=1.4,<2
-        protobuf>=2.5.0
-        python-gflags>=2.0
-        pyyaml>=3.10
-        Pillow>=2.3.0
-        six>=1.1.0
-Here I encountered a problem when pip tries to install numpy:
-
-        UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 72: ordinal not in range(128)
-I found answer on [Stackoverflow][4], according to that answer, I need to install python-numpy manually by apt-get rather than numpy by pip:
-
-        apt-get install python-numpy
-The problem is that we need to modify the requirements.txt file now since we already used apt-get to install numpy rather than pip. So I delete the first two rows of the requirements.txt and run 
-
-        sudo pip install -r ./python/requirements.txt 
-to install other requirements. Maybe a better way to install all the requirements is to use pip manually and install them one by one, this is inconvinient but you can solve the complaints immediately, knowing which one has been successfully installed.
-
 4.  Finally, we can compile the python interface:
 
         make pycaffe
@@ -138,5 +96,4 @@ This will take quiet a while. You can take the time to install the python interf
 
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/runtest-success.png
 [2]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/lenet-result.png
-[3]: https://pip.pypa.io/en/stable/index.html
-[4]: http://stackoverflow.com/questions/26473681/pip-install-numpy-throws-an-error-ascii-codec-cant-decode-byte-0xe2
+
