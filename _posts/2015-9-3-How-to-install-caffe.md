@@ -74,6 +74,7 @@ Git might be the easiest way to download caffe. Of course you will first apt-get
 
         sudo apt-get install python-pip
 2.  Next, we need to use pip to install all the dependecies for python interface, run the following shell command in caffe/python:
+
         for req in $(cat requirements.txt); do pip install $req; done
     This will take a while. Sometimes pip seems to stuck when running setup.py, but it is actually not.  
 3.  Finally, we can compile the python interface:
