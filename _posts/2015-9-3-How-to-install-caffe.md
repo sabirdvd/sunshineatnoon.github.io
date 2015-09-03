@@ -7,7 +7,7 @@ published: true
 
 
 
-I've been playing with caffe for a while. Installing it on unbuntu is easy thanks to the apt-get command. However, due to my bad memory, I'd better write down the steps as well as problems I encountered while installing it. 
+I've been playing with [caffe](http://caffe.berkeleyvision.org/) for a while. Installing it on unbuntu is easy thanks to the apt-get command. However, due to my bad memory, I'd better write down the steps as well as problems I encountered while installing it. 
 
 ## Get ubuntu.
 
@@ -119,8 +119,14 @@ This will take quiet a while. You can take the time to install the python interf
 
 ![lenet-result][2]
 
+## Reference:
+[1] [caffe Ubuntu installation guide page][4]
+[2] [caffe lenet training guide page][5]
 
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/runtest-success.png
 [2]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/lenet-result.png
 [3]: https://pip.pypa.io/en/stable/
+[4]: http://caffe.berkeleyvision.org/install_apt.html
+[5]: http://caffe.berkeleyvision.org/gathered/examples/mnist.html
+
 
