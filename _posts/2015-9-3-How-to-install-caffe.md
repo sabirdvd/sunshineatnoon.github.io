@@ -69,8 +69,11 @@ Git might be the easiest way to download caffe. Of course you will first apt-get
 
 ![runtest-success][1]
 
-## Training LeNet on MNIST with Caffe
-1.  First we need to insall [pip][3]. Pip is a package management system used to install and manage software packages written in Python. It can help us install all the dependencies the python interface needs.
+## Compile python interface for caffe
+
+Python is convinient and easy to use. Especially helpful when you want to use caffe in a project.
+
+1.  To compile python interface for caffe, first we need to insall [pip][3]. Pip is a package management system used to install and manage software packages written in Python. It can help us install all the dependencies the python interface needs.
 
         sudo apt-get install python-pip
 2.  Next, we need to use pip to install all the dependecies for python interface, run the following shell command in caffe/python:
@@ -99,7 +102,7 @@ Git might be the easiest way to download caffe. Of course you will first apt-get
         import caffe
 If the last import caffe doesn't pop out any error, congratulations, now you can use python to play with caffe!
         
-## Training LeNet on MNIST with Caffe
+## Train LeNet on MNIST with Caffe
 
 A quick start with caffe is to run mnist using caffe since this data set is small and easy to get. 
 
