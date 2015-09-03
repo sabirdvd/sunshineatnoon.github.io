@@ -79,6 +79,15 @@ Git might be the easiest way to download caffe. Of course you will first apt-get
 3.  Finally, we can compile the python interface:
 
         make pycaffe
+    Here I encountered a error: fatal error: numpy/arrayobject.h: No such file or directory. That means that caffe can't find      numpy. By installing numpy using pip, the numpy/arrayobject.h should be at /usr/local/lib/python2.7/dist-packages/numpy/core/include/, but in the default Makefile.config file, I find this line:
+        PYTHON_INCLUDE := /usr/include/python2.7 \
+		/usr/lib/python2.7/dist-packages/numpy/core/include
+    This is where our error is. So by changing this line to:
+        PYTHON_INCLUDE := /usr/include/python2.7 \
+		/usr/local/lib/python2.7/dist-packages/numpy/core/include   
+    Our problem is gone.
+ 
+
         
 ## Training LeNet on MNIST with Caffe
 
