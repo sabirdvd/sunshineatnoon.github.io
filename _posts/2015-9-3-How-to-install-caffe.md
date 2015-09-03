@@ -9,11 +9,11 @@ published: true
 
 I've been playing with caffe for a while. Installing it on unbuntu is easy thanks to the apt-get command. However, due to my bad memory, I'd better write down the steps as well as problems I encountered while installing it. 
 ## Steps:
-**1. Get ubuntu.**
+## Get ubuntu.
 
 I've been playing with CentOS at work and Ubuntu at home. From my personal experience, ubuntu seems to offer more on-shelf softwares than CentOS. So it might be a little nicer for newbees like me.
 
-**2. Installing dependencies.**
+## Installing dependencies.
 
 The following commands are used to install [protobuf](https://developers.google.com/protocol-buffers/docs/overview), [leveldb](http://leveldb.org/), [snappy](https://github.com/google/snappy), [opencv](http://opencv.org/), [hdf5](https://www.hdfgroup.org/HDF5/), protobuf compiler and [boost](http://www.boost.org/):
 
@@ -28,13 +28,13 @@ Keep going to install dependencies, the commands below install [gflags](https://
 
 This is why I like linux more than windows or mac os.
 
-**3. Download Caffe**
+## Download Caffe
 
 Git might be the easiest way to download caffe. Of course you will first apt-get install git and then clone caffe to your current folder.
 
         git clone git://github.com/BVLC/caffe.git
 
-**4. Compile Caffe**
+## Compile Caffe
 
 Compiling caffe is like walking on the shells because this is where I encountered most of the errors. To compile caffe, first use cmd to enter the caffe directory. For me, I put it in the Documents/caffe directory:
 
@@ -70,26 +70,7 @@ If you saw the image below, congratulations! You have caffe installed properly!
 
 ![runtest-success][1]
 
-**5. Training LeNet on MNIST with Caffe**
-
-A quick start with caffe is to run mnist using caffe since this data set is small and easy to get. To get this dataset, just run the command below under caffe root directory:
-
-        ./data/mnist/get_mnist.sh
-        ./examples/mnist/create_mnist.sh
-        
-Since I only use CPU here, I need to change solver_mode in caffe/examples/mnist/lenet_solver.prototxt to solver_mode: CPU.
-
-        solver_mode: CPU
-        
-Then we start to train lenet model:
-
-        ./examples/mnist/train_lenet.sh
-        
-This will take quiet a while. You can take the time to install the python interface in another terminal. After the training, I got nearly 99.06% accuracy as below.
-
-![lenet-result][2]
-
-**6. Compile python interface for caffe**
+## Compile python interface for caffe
 
 Python is easy and convinient, especially when you want to use caffe for some projects. In order to use the python interface of caffe, we need to compile it. All the commands below are supposed to be done in the caffe root directory.
 *   First make sure you get python in your system. By simply running the command python, you can check if you have python installed.
@@ -137,6 +118,26 @@ Python is easy and convinient, especially when you want to use caffe for some pr
 *   Finally, we can compile the python interface:
 
         make pycaffe
+        
+## Training LeNet on MNIST with Caffe
+
+A quick start with caffe is to run mnist using caffe since this data set is small and easy to get. To get this dataset, just run the command below under caffe root directory:
+
+        ./data/mnist/get_mnist.sh
+        ./examples/mnist/create_mnist.sh
+        
+Since I only use CPU here, I need to change solver_mode in caffe/examples/mnist/lenet_solver.prototxt to solver_mode: CPU.
+
+        solver_mode: CPU
+        
+Then we start to train lenet model:
+
+        ./examples/mnist/train_lenet.sh
+        
+This will take quiet a while. You can take the time to install the python interface in another terminal. After the training, I got nearly 99.06% accuracy as below.
+
+![lenet-result][2]
+
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/runtest-success.png
 [2]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/lenet-result.png
 [3]: https://pip.pypa.io/en/stable/index.html
