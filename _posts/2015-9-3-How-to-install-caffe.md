@@ -69,7 +69,14 @@ Git might be the easiest way to download caffe. Of course you will first apt-get
 
 ![runtest-success][1]
 
-4.  Finally, we can compile the python interface:
+## Training LeNet on MNIST with Caffe
+1.  First we need to insall [pip][3].pip is a package management system used to install and manage software packages written in Python. It can help us install all the dependencies the python interface needs.
+
+        sudo apt-get install python-pip
+2.  Next, we need to use pip to install all the dependecies for python interface, run the following shell command in caffe/python:
+        for req in $(cat requirements.txt); do pip install $req; done
+    This will take a while. Sometimes pip seems to stuck when running setup.py, but it is actually not.  
+3.  Finally, we can compile the python interface:
 
         make pycaffe
         
@@ -96,4 +103,5 @@ This will take quiet a while. You can take the time to install the python interf
 
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/runtest-success.png
 [2]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/lenet-result.png
+[3]: https://pip.pypa.io/en/stable/
 
