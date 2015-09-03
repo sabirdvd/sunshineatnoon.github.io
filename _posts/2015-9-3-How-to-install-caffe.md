@@ -13,7 +13,7 @@ I've been playing with [caffe](http://caffe.berkeleyvision.org/) for a while. In
 
 I've been playing with CentOS at work and Ubuntu at home. From my personal experience, ubuntu seems to offer more on-shelf softwares than CentOS. So it might be a little nicer for newbees like me.
 
-## Installing dependencies.
+## Install dependencies.
 
 1.  The following commands are used to install [protobuf](https://developers.google.com/protocol-buffers/docs/overview), [leveldb](http://leveldb.org/), [snappy](https://github.com/google/snappy), [opencv](http://opencv.org/), [hdf5](https://www.hdfgroup.org/HDF5/), protobuf compiler and [boost](http://www.boost.org/):
 
