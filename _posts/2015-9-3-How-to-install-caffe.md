@@ -122,7 +122,12 @@ Here I encountered a problem when pip tries to install numpy:
 I found answer on [Stackoverflow][4], according to that answer, I need to install python-numpy manually by apt-get rather than numpy by pip:
 
         apt-get install python-numpy
-The problem is that we need to modify the requirements.txt file now since we already used apt-get to install numpy rather than pip. So I delete the first two rows of the requirements.txt and run sudo pip install -r ./python/requirements.txt to install other requirements. Maybe a better way to install all the requirements is to use pip manually and install them one by one, this is inconvinient but you can solve the complaints immediately, knowing which one has been successfully installed.
+The problem is that we need to modify the requirements.txt file now since we already used apt-get to install numpy rather than pip. So I delete the first two rows of the requirements.txt and run 
+
+        sudo pip install -r ./python/requirements.txt 
+to install other requirements. 
+
+Maybe a better way to install all the requirements is to use pip manually and install them one by one, this is inconvinient but you can solve the complaints immediately, knowing which one has been successfully installed.
 
 4.  Finally, we can compile the python interface:
 
