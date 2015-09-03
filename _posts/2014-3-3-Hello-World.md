@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "How to install caffe on ubuntu 14.04(without GPU)"
+title: How to install caffe on ubuntu 14.04(without GPU)
 published: true
 ---
+
 
 
 
@@ -61,7 +62,5 @@ Again, if no errors pop out, we run the test to see if everything is installed c
 > make runtest
 
 If you saw the image below, congratulations! You have caffe installed properly!
-
-
-
+![successfully running tests]({{site.baseurl}}/_posts/runtest success.png)
 
