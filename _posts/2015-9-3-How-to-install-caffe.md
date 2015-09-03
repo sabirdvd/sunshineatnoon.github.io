@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to install caffe on ubuntu 14.04(without GPU)
+title: How to install caffe on ubuntu 14.04(without GPU) and python interface
 published: true
 ---
 
@@ -90,9 +90,13 @@ Git might be the easiest way to download caffe. Of course you will first apt-get
     
         PYTHON_INCLUDE := /usr/include/python2.7 \
 		/usr/local/lib/python2.7/dist-packages/numpy/core/include   
-    Then our problem is gone.
- 
+    Our problem is gone.
+4.  Now the python interface of caffe is ready. We can enter a python shell and run commands below to tell python where to find the caffe module:
 
+        import sys
+        sys.path.append("~/Documents/caffe/python")  (wherever your caffe/python is)
+        import caffe
+If the last import caffe doesn't pop out any error, congratulations, now you can use python to play with caffe!
         
 ## Training LeNet on MNIST with Caffe
 
@@ -114,6 +118,7 @@ A quick start with caffe is to run mnist using caffe since this data set is smal
 This will take quiet a while. You can take the time to install the python interface in another terminal. After the training, I got nearly 99.06% accuracy as below.
 
 ![lenet-result][2]
+
 
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/runtest-success.png
 [2]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/lenet-result.png
