@@ -116,6 +116,14 @@ Python is easy and convinient, especially when you want to use caffe for some pr
         Pillow>=2.3.0
         
         six>=1.1.0
+Here I encountered a problem when pip tries to install numpy:
+
+        UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 72: ordinal not in range(128)
+I found answer on [Stackoverflow][4], according to that answer, I need to install python-numpy manually by apt-get rather than numpy by pip:
+
+        apt-get install python-numpy
+The problem is that we need to modify the requirements.txt file now since we already used apt-get to install numpy rather than pip. So I delete the first two rows of the requirements.txt and run sudo pip install -r ./python/requirements.txt to install other requirements. Maybe a better way to install all the requirements is to use pip manually and install them one by one, this is inconvinient but you can solve the complaints immediately, knowing which one has been successfully installed.
+
 4.  Finally, we can compile the python interface:
 
         make pycaffe
@@ -123,6 +131,7 @@ Python is easy and convinient, especially when you want to use caffe for some pr
 ## Training LeNet on MNIST with Caffe
 
 A quick start with caffe is to run mnist using caffe since this data set is small and easy to get. 
+
 1.  To get this dataset, just run the command below under caffe root directory:
 
         ./data/mnist/get_mnist.sh
@@ -143,3 +152,4 @@ This will take quiet a while. You can take the time to install the python interf
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/runtest-success.png
 [2]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/lenet-result.png
 [3]: https://pip.pypa.io/en/stable/index.html
+[4]: http://stackoverflow.com/questions/26473681/pip-install-numpy-throws-an-error-ascii-codec-cant-decode-byte-0xe2
