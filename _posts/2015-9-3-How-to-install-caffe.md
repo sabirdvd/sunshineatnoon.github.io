@@ -8,7 +8,7 @@ published: true
 
 
 I've been playing with caffe for a while. Installing it on unbuntu is easy thanks to the apt-get command. However, due to my bad memory, I'd better write down the steps as well as problems I encountered while installing it. 
-## Steps:
+
 ## Get ubuntu.
 
 I've been playing with CentOS at work and Ubuntu at home. From my personal experience, ubuntu seems to offer more on-shelf softwares than CentOS. So it might be a little nicer for newbees like me.
@@ -75,9 +75,10 @@ Git might be the easiest way to download caffe. Of course you will first apt-get
 Python is easy and convinient, especially when you want to use caffe for some projects. In order to use the python interface of caffe, we need to compile it. All the commands below are supposed to be done in the caffe root directory.
 
 1.  First make sure you get python in your system. By simply running the command python, you can check if you have python installed.
-2.  Next, we need to install [Pip][3]. Pip is a package management system used to install and manage software packages written in Python. On ubuntu, just use apt-get to install it:
+2.  Next, we need to install [Pip][3]. Pip is a package management system used to install and manage software packages written in Python. On ubuntu, just use apt-get to install it and <b>update it</b>:
    
         sudo apt-get install python-pip python-dev build-essential 
+        sudo pip install --upgrade pip
 3.  Then we can use pip to install all the essential requirements in order to compile the python interface:
    
         sudo pip install -r ./python/requirements.txt
