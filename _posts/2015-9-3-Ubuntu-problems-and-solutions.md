@@ -33,9 +33,17 @@ I also don't know what caused this one. My side bar and top bar just disapper, a
         unity-tweak-tool --reset-unity
 6.  Reboot and log in again using unity(also by clicking the ubuntu logo next to your user name when you log in) this time and the bars are back!
 
+## How to install Sublime Text3 on Ubuntu
+Answers found [here][4]
+
+        sudo add-apt-repository ppa:webupd8team/sublime-text-3
+        sudo apt-get update
+        sudo apt-get install sublime-text
+
 [1]: http://askubuntu.com/questions/356842/ubuntu-default-terminal-missing-on-13-04
 [2]: http://askubuntu.com/questions/476930/ubuntu-desktop-does-not-load
 [3]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/gnome-log-in.png
+[4]: http://askubuntu.com/questions/172698/how-do-i-install-sublime-text-2-3
 
 
 
