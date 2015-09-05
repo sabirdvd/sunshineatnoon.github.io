@@ -39,6 +39,7 @@ Answers found [here][4]
         sudo add-apt-repository ppa:webupd8team/sublime-text-3
         sudo apt-get update
         sudo apt-get install sublime-text
+Then you can find and launch sublime-text3 in the Application.
 
 [1]: http://askubuntu.com/questions/356842/ubuntu-default-terminal-missing-on-13-04
 [2]: http://askubuntu.com/questions/476930/ubuntu-desktop-does-not-load
