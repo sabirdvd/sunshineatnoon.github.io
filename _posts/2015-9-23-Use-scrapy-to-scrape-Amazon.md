@@ -46,4 +46,5 @@ An item in Scrapy is like a model in django, or object in object-oriented langua
 	    Source = Field()
 	    #deep learning feature of image
 	    Feature = Field()
+    ```
 Please ignore the Feature Field, that is something I will take care of in the future. For more information about Scrapy Items, you can refer to the documentation [here](http://doc.scrapy.org/en/latest/topics/items.html)
