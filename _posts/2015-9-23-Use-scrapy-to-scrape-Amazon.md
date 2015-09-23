@@ -29,6 +29,13 @@ Of course you can name your project whatever you like. For me, I name it amazon.
 ## Modify items.py.
 
 An item in Scrapy is like a model in django, or object in object-oriented language like C++. An item consitutes several fields, each field will be given a value when we crawl the website. Taking Amazon for example, when I scrape Amazon, I want the name of a commodity, the path where I store image of this commodity, and the detailed web page address of this commodity. Thus, my items.py looks like this:
+	```javascript
+	function fancyAlert(arg) {
+	  if(arg) {
+	    $.facebox({div:'#foo'})
+	  }
+	}
+	```
 
 	```javascript
 	from scrapy.item import Item, Field
