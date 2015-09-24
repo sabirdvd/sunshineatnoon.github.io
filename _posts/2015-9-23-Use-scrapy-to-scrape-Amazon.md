@@ -50,7 +50,7 @@ Please ignore the Feature Field, that is something I will take care of in the fu
 
 ## Modify pipelines.py.
 
-After crawling and storing values in an Item, we need to send the item through a pipeline and process it through several components that are executed sequentially. In this application, I only want to save the first three fields of an Item into a  sqlite database. Before we start to write code, we can have a look at pipelines.py:
+After crawling and storing values in an Item, we need to send the item through a pipeline and process it through several components that are executed sequentially. In this application, I only want to save the first three fields of an Item into a  sqlite database. Before we start to write code, we can have a look at the default pipelines.py file:
 
 	# -*- coding: utf-8 -*-
 	
@@ -63,14 +63,14 @@ After crawling and storing values in an Item, we need to send the item through a
 	class Tutorial1Pipeline(object):
 	    def process_item(self, item, spider):
 	        return item
-The default code already define a function process_item, this is where we do all the processes to an Item. But before that, we need to do some initialization work such as create database and table. So we implement two functions in the __init__ function of the pipeline class: setupDBCon() and createTables(). The first one is used to create a sqlite database and the second one is used to create a table called Amazon. Usually in any database, we need to check if a table already exsits before we create it. If the table does exist, we need to drop it first and create it again. So here comes the initialization code:
+The default code already defines a function: `process_item`, this is where we do all the processes to an Item. But before that, we need to do some initialization work such as creating database and tables. So we implement two functions in the __init__ function of the pipeline class: `setupDBCon()` and `createTables()`. The first one is used to create a sqlite database and the second one is used to create a table called Amazon. Usually in a database, we need to check if a table already exsits before we create it. Here I will use a lazy solution, if the table does exist, I drop it first and create it again. So here comes the initialization code:
 
     def __init__(self):
         self.setupDBCon()
         self.createTables()
         
     def setupDBCon(self):
-        self.con = sqlite3.connect('/home/xuetingli/Documents/python-projects/scrapy/amazon/test.db')
+        self.con = sqlite3.connect('/path/to/amazon/test.db') #Change this to your own directory
         self.cur = self.con.cursor()
     
     def createTables(self):
@@ -81,8 +81,39 @@ The default code already define a function process_item, this is where we do all
         #drop amazon table if it exists
         self.cur.execute("DROP TABLE IF EXISTS Amazon")
         
-To keep the code neat, I will use a single function storeInDb to store the item in sqlite database, so the process_item function looks like this:
+Now we can implement the most important function of the pipeline:`process_item()`. To keep the code neat, I will use a single function storeInDb to store the item in sqlite database, so the `process_item()` function looks like this:
 
     def process_item(self, item, spider):
         self.storeInDb(item)
         return item
+The storeInDb function is also easy, it just excute an insert SQL statement. The code is like this:
+
+    def storeInDb(self,item):
+        self.cur.execute("INSERT INTO Amazon(\
+            name, \
+            path, \
+            source \
+            ) \
+        VALUES( ?, ?, ?)", \
+        ( \
+            item.get('Name',''),
+            item.get('Path',''),
+            item.get('Source','')
+        ))
+        print '------------------------'
+        print 'Data Stored in Database'
+        print '------------------------'
+        self.con.commit()
+We are almost done with pipeline, but we all want to be good citizens, don't we? So we help close the connection to the database before we detroy the class instance, so we implement our last two function in pipeline like this:
+
+    def closeDB(self):
+        self.con.close()
+        
+    def __del__(self):
+        self.closeDB()
+Now we are done with the pipeline.
+
+## Create and modify amazonSpider.py.
+
+Here comes the most chanllege one: the spider which crawls information from the website. 
+In order to create a spider, we first create a new file called amazonSpider.py in the amazon/spiders folder. The most important function in a spider is parse(), which defines what to do to a page we crawled.
