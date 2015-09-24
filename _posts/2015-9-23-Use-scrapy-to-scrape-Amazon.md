@@ -63,7 +63,25 @@ After crawling and storing values in an Item, we need to send the item through a
 	class Tutorial1Pipeline(object):
 	    def process_item(self, item, spider):
 	        return item
-The default code already define a function process_item, this is where we do all the processes to an Item. To keep the code neat, I will use a single function storeInDb to store the item in sqlite database, so the process_item function looks like this:
+The default code already define a function process_item, this is where we do all the processes to an Item. But before that, we need to do some initialization work such as create database and table. So we implement two functions in the __init__ function of the pipeline class: setupDBCon() and createTables(). The first one is used to create a sqlite database and the second one is used to create a table called Amazon. Usually in any database, we need to check if a table already exsits before we create it. If the table does exist, we need to drop it first and create it again. So here comes the initialization code:
+
+    def __init__(self):
+        self.setupDBCon()
+        self.createTables()
+        
+    def setupDBCon(self):
+        self.con = sqlite3.connect('/home/xuetingli/Documents/python-projects/scrapy/amazon/test.db')
+        self.cur = self.con.cursor()
+    
+    def createTables(self):
+        self.dropAmazonTable()
+        self.createAmazonTable()
+    
+    def dropAmazonTable(self):
+        #drop amazon table if it exists
+        self.cur.execute("DROP TABLE IF EXISTS Amazon")
+        
+To keep the code neat, I will use a single function storeInDb to store the item in sqlite database, so the process_item function looks like this:
 
     def process_item(self, item, spider):
         self.storeInDb(item)
