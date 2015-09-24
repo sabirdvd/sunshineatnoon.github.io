@@ -47,3 +47,24 @@ An item in Scrapy is like a model in django, or object in object-oriented langua
 	    Feature = Field()
 	
 Please ignore the Feature Field, that is something I will take care of in the future. For more information about Scrapy Items, you can refer to the documentation [here](http://doc.scrapy.org/en/latest/topics/items.html)
+
+## Modify pipelines.py.
+
+After crawling and storing values in an Item, we need to send the item through a pipeline and process it through several components that are executed sequentially. In this application, I only want to save the first three fields of an Item into a  sqlite database. Before we start to write code, we can have a look at pipelines.py:
+
+	# -*- coding: utf-8 -*-
+	
+	# Define your item pipelines here
+	#
+	# Don't forget to add your pipeline to the ITEM_PIPELINES setting
+	# See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
+	
+	
+	class Tutorial1Pipeline(object):
+	    def process_item(self, item, spider):
+	        return item
+The default code already define a function process_item, this is where we do all the processes to an Item. To keep the code neat, I will use a single function storeInDb to store the item in sqlite database, so the process_item function looks like this:
+
+    def process_item(self, item, spider):
+        self.storeInDb(item)
+        return item
