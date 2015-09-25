@@ -14,11 +14,14 @@ All my code runs fine on CentOS7 and MacOS, pip 7.1.0, Scrapy 1.0.3 and Python 2
 
 If you have [pip](https://pypi.python.org/pypi/pip), then the installation is easy, just run:
 
+```bash
     pip install scrapy
+```
 If you don't have pip, I strongly recommend you to install it:
 
+```bash
 	sudo yum install python-pip
-
+```
 ## Start a project.
 
 To start a scrapy project, cd to where you want to put the project and then run:
