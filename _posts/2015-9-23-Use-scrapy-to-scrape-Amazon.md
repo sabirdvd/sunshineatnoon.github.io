@@ -116,4 +116,8 @@ Now we are done with the pipeline.
 ## Create and modify amazonSpider.py.
 
 Here comes the most chanllege one: the spider which crawls information from the website. 
-In order to create a spider, we first create a new file called amazonSpider.py in the amazon/spiders folder. The most important function in a spider is parse(), which defines what to do to a page we crawled.
+In order to create a spider, we first create a new file called amazonSpider.py in the amazon/spiders folder. The most important function in a spider is `parse()`, which defines what to do to a page we crawled. Here we crawl from this page:
+![amazon-website][1]
+
+
+[1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/amazon-website.png
