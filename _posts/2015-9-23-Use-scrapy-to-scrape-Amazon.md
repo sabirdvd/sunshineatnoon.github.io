@@ -116,8 +116,40 @@ Now we are done with the pipeline.
 ## Create and modify amazonSpider.py.
 
 Here comes the most chanllege one: the spider which crawls information from the website. 
-In order to create a spider, we first create a new file called amazonSpider.py in the amazon/spiders folder. The most important function in a spider is `parse()`, which defines what to do to a page we crawled. Here we crawl from this page:
+In order to create a spider, we first create a new file called amazonSpider.py in the amazon/spiders folder. The most important function in a spider is `parse()`, which defines what to do to a page we crawled. Here I need the name of a commodity, the url of the commodity image, and the detailed web page address of this commodity:
 ![amazon-website][1]
+In scrapy, we need to use [XPath](https://en.wikipedia.org/wiki/XPath) to locate the information we need. The code which uses XPath to parse names, image urls and commodity urls is like this:
 
+	namelist = response.xpath('//a[@class="a-link-normal s-access-detail-page s-overflow-ellipsis a-text-normal"]/@title').extract()
+        htmllist = response.xpath('//a[@class="a-link-normal s-access-detail-page s-overflow-ellipsis a-text-normal"]/@href').extract()
+        imglist = response.xpath('//img[@class="s-access-image cfMarker"]/@src').extract()
 
+If you are not fimilar with XPath, I would recommend this [tutorial](http://www.w3schools.com/xsl/). 
+Then we create an Item for each backpack in a for loop, here I also need to download images of the backpacks and save them to the local file system, so I use the urllib module to save them in the file system and then store the path of where I store the images in the Item:
+	
+	listlength = len(namelist)
+        for i in range(0,listlength):
+            item = AmazonItem()
+            item['Name'] = namelist[i]
+            item['Source'] = htmllist[i]
+        
+            urllib.urlretrieve(imglist[i],"/path/to/crawlImages/"+str(amazonSpider.imgcount)+".jpg")
+            item['Path'] = "/path/to/crawlImages/"+str(amazonSpider.imgcount)+".jpg"
+            amazonSpider.imgcount = amazonSpider.imgcount + 1
+            yield item
+Don't forget to yield item in every loop, this is the command to put the item through the pipeline.
+Above what we need to do for a single web page, but there are only 60 backpacks in a web page, what if we need more backpacks? We note that in the amazon web page, we have the next button to reach for the next page. Here we use a tricky and easy to reach out for other pages. I will first illustrate some pages:
+
+	[http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=2&bbn=10445813011&ie=UTF8&qid=1442910987](http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=2&bbn=10445813011&ie=UTF8&qid=1442910987)
+	[http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=3&bbn=10445813011&ie=UTF8&qid=1442910987](http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=3&bbn=10445813011&ie=UTF8&qid=1442910987)
+	[http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=4&bbn=10445813011&ie=UTF8&qid=1442910987](http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=4&bbn=10445813011&ie=UTF8&qid=1442910987)
+	...
+These are the urls for the next three pages of backpacks that we can crawl from. Do you see the difference? Yes, the only difference is the page number in the url. Thus we can take advantage of this information and tell our spider this is the web page I want you to crawl from. So, how do we do this? Here comes the solution: `yield scrapy.Request('...')`. We use a for loop, say I want 20 pages, thus, I use a 20 for loops and yield a request for each page:
+
+	def start_requests(self):
+	        yield scrapy.Request("http://www.amazon.com/s/ref=sr_ex_n_3?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&bbn=10445813011&ie=UTF8&qid=1442910853&ajr=0",self.parse)
+	        
+	        for i in range(2,20):
+	            yield scrapy.Request("http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page="+str(i)+"&bbn=10445813011&ie=UTF8&qid=1442910987",self.parse)
+        
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/amazon-website.png
