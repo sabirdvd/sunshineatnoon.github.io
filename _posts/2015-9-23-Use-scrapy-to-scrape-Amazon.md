@@ -210,9 +210,12 @@ Running is easy, just type this command in the amazon/ directory:
 ```bash
 scrapy crawl amazon
 ```
-Then you will see images in the CrawlImages/ folder and a test.db file, this is the database file, you can use [sqlite broswer](http://sqlitebrowser.org/) to view data in this database file.
-
+Then you will see images in the CrawlImages/ folder and a test.db file, this is the database file, you can use [sqlite broswer](http://sqlitebrowser.org/) to view data in this database file like this:
+![resulta][2]
+![resultb][3]
 ## Source Code.
 
 Above is how I implemented the scrapy project, the intact code is on my [Github Page](https://github.com/sunshineatnoon/Scrapy-Amazon-Sqlite)
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/amazon-website.png
+[2]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/resulta.png
+[3]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/resultb.png
