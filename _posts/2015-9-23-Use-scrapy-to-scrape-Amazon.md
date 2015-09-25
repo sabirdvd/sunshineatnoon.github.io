@@ -184,7 +184,7 @@ If you want to learn more about settings, [here](http://doc.scrapy.org/en/1.0/to
 
 Above is how I implemented the scrapy project, the intact code is on my [Github Page](https://github.com/sunshineatnoon/Scrapy-Amazon-Sqlite)
 
-```javascript
+```python
 if (isAwesome){
   return true
 }
