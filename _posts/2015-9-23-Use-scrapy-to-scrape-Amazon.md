@@ -184,4 +184,10 @@ If you want to learn more about settings, [here](http://doc.scrapy.org/en/1.0/to
 
 Above is how I implemented the scrapy project, the intact code is on my [Github Page](https://github.com/sunshineatnoon/Scrapy-Amazon-Sqlite)
 
+	```javascript
+	if (isAwesome){
+	  return true
+	}
+	```
+
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/amazon-website.png
