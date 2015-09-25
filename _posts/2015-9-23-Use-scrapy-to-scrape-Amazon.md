@@ -79,7 +79,7 @@ def __init__(self):
 	self.createTables()
 
 def setupDBCon(self):
-	self.con = sqlite3.connect('/path/to/amazon/test.db') #Change this to your own directory
+	self.con = sqlite3.connect('./test.db') #Change this to your own directory
 	self.cur = self.con.cursor()
 
 def createTables(self):
@@ -150,7 +150,7 @@ for i in range(0,listlength):
     item['Name'] = namelist[i]
     item['Source'] = htmllist[i]
 
-    urllib.urlretrieve(imglist[i],"/path/to/crawlImages/"+str(amazonSpider.imgcount)+".jpg")
+    urllib.urlretrieve(imglist[i],"./crawlImages/"+str(amazonSpider.imgcount)+".jpg")
     item['Path'] = "/path/to/crawlImages/"+str(amazonSpider.imgcount)+".jpg"
     amazonSpider.imgcount = amazonSpider.imgcount + 1
     yield item
@@ -203,7 +203,16 @@ ITEM_PIPELINES = {
 ```
 If you want to learn more about settings, [here](http://doc.scrapy.org/en/1.0/topics/settings.html) is the documentaion.
 
+## Run the project.
+
+Running is easy, just type this command in the amazon/ directory:
+
+```bash
+scrapy crawl amazon
+```
+Then you will see images in the CrawlImages/ folder and a test.db file, this is the database file, you can use [sqlite broswer](http://sqlitebrowser.org/) to view data in this database file.
+
+## Source Code.
+
 Above is how I implemented the scrapy project, the intact code is on my [Github Page](https://github.com/sunshineatnoon/Scrapy-Amazon-Sqlite)
-
-
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/amazon-website.png
