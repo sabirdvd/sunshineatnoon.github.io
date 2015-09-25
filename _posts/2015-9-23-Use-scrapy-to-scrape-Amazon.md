@@ -121,8 +121,8 @@ In order to create a spider, we first create a new file called amazonSpider.py i
 In scrapy, we need to use [XPath](https://en.wikipedia.org/wiki/XPath) to locate the information we need. The code which uses XPath to parse names, image urls and commodity urls is like this:
 
 	namelist = response.xpath('//a[@class="a-link-normal s-access-detail-page s-overflow-ellipsis a-text-normal"]/@title').extract()
-        htmllist = response.xpath('//a[@class="a-link-normal s-access-detail-page s-overflow-ellipsis a-text-normal"]/@href').extract()
-        imglist = response.xpath('//img[@class="s-access-image cfMarker"]/@src').extract()
+	htmllist = response.xpath('//a[@class="a-link-normal s-access-detail-page s-overflow-ellipsis a-text-normal"]/@href').extract()
+	imglist = response.xpath('//img[@class="s-access-image cfMarker"]/@src').extract()
 
 If you are not fimilar with XPath, I would recommend this [tutorial](http://www.w3schools.com/xsl/). 
 Then we create an Item for each backpack in a for loop, here I also need to download images of the backpacks and save them to the local file system, so I use the urllib module to save them in the file system and then store the path of where I store the images in the Item:
