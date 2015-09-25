@@ -211,7 +211,9 @@ Running is easy, just type this command in the amazon/ directory:
 scrapy crawl amazon
 ```
 Then you will see images in the CrawlImages/ folder and a test.db file, this is the database file, you can use [sqlite broswer](http://sqlitebrowser.org/) to view data in this database file like this:
+
 ![resulta][2]
+
 ![resultb][3]
 ## Source Code.
 
