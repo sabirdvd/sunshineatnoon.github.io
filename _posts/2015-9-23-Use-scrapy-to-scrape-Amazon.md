@@ -161,7 +161,7 @@ If you want to know more about spider, [here](http://doc.scrapy.org/en/1.0/topic
 
 Finally, we come to the last part: settings. In this file, we only need to make some configurations of our project. Here I only need to tell the project I have a pipeline and I want my items go through the pipeline after they are fed with values from the web page. So my settings looks like this:
 
-	```python
+```python
 # -*- coding: utf-8 -*-
 from scrapy.settings.default_settings import ITEM_PIPELINES
 
@@ -182,7 +182,7 @@ NEWSPIDER_MODULE = 'amazon.spiders'
 ITEM_PIPELINES = {
     'amazon.pipelines.AmazonPipeline': 0
     }
-        ```
+```
 If you want to learn more about settings, [here](http://doc.scrapy.org/en/1.0/topics/settings.html) is the documentaion.
 
 Above is how I implemented the scrapy project, the intact code is on my [Github Page](https://github.com/sunshineatnoon/Scrapy-Amazon-Sqlite)
