@@ -128,7 +128,7 @@ If you are not fimilar with XPath, I would recommend this [tutorial](http://www.
 Then we create an Item for each backpack in a for loop, here I also need to download images of the backpacks and save them to the local file system, so I use the urllib module to save them in the file system and then store the path of where I store the images in the Item:
 	
 	listlength = len(namelist)
-        for i in range(0,listlength):
+	for i in range(0,listlength):
             item = AmazonItem()
             item['Name'] = namelist[i]
             item['Source'] = htmllist[i]
