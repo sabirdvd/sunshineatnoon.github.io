@@ -151,7 +151,7 @@ for i in range(0,listlength):
     item['Source'] = htmllist[i]
 
     urllib.urlretrieve(imglist[i],"./crawlImages/"+str(amazonSpider.imgcount)+".jpg")
-    item['Path'] = "/path/to/crawlImages/"+str(amazonSpider.imgcount)+".jpg"
+    item['Path'] = "./crawlImages/"+str(amazonSpider.imgcount)+".jpg"
     amazonSpider.imgcount = amazonSpider.imgcount + 1
     yield item
 ```
