@@ -111,7 +111,7 @@ We are almost done with pipeline, but we all want to be good citizens, don't we?
         
     def __del__(self):
         self.closeDB()
-Now we are done with the pipeline.
+Now we are done with the pipeline. [Here](http://doc.scrapy.org/en/1.0/topics/item-pipeline.html) is the documentation of pipeline.
 
 ## Create and modify amazonSpider.py.
 
@@ -140,16 +140,48 @@ Then we create an Item for each backpack in a for loop, here I also need to down
 Don't forget to yield item in every loop, this is the command to put the item through the pipeline.
 Above what we need to do for a single web page, but there are only 60 backpacks in a web page, what if we need more backpacks? We note that in the amazon web page, we have the next button to reach for the next page. Here we use a tricky and easy to reach out for other pages. I will first illustrate some pages:
 
-	[http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=2&bbn=10445813011&ie=UTF8&qid=1442910987](http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=2&bbn=10445813011&ie=UTF8&qid=1442910987)
-	[http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=3&bbn=10445813011&ie=UTF8&qid=1442910987](http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=3&bbn=10445813011&ie=UTF8&qid=1442910987)
-	[http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=4&bbn=10445813011&ie=UTF8&qid=1442910987](http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=4&bbn=10445813011&ie=UTF8&qid=1442910987)
+	http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=2&bbn=10445813011&ie=UTF8&qid=1442910987
+	http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=3&bbn=10445813011&ie=UTF8&qid=1442910987
+	http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page=4&bbn=10445813011&ie=UTF8&qid=1442910987
 	...
+	
 These are the urls for the next three pages of backpacks that we can crawl from. Do you see the difference? Yes, the only difference is the page number in the url. Thus we can take advantage of this information and tell our spider this is the web page I want you to crawl from. So, how do we do this? Here comes the solution: `yield scrapy.Request('...')`. We use a for loop, say I want 20 pages, thus, I use a 20 for loops and yield a request for each page:
 
 	def start_requests(self):
-	        yield scrapy.Request("http://www.amazon.com/s/ref=sr_ex_n_3?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&bbn=10445813011&ie=UTF8&qid=1442910853&ajr=0",self.parse)
+		yield scrapy.Request("http://www.amazon.com/s/ref=sr_ex_n_3?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&bbn=10445813011&ie=UTF8&qid=1442910853&ajr=0",self.parse)
 	        
-	        for i in range(2,20):
-	            yield scrapy.Request("http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page="+str(i)+"&bbn=10445813011&ie=UTF8&qid=1442910987",self.parse)
-        
+		for i in range(2,20):
+			yield scrapy.Request("http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page="+str(i)+"&bbn=10445813011&ie=UTF8&qid=1442910987",self.parse)
+
+The start_requests function is just as the parse function, it is a pre-defined function in scrapy, thus we can't change its name. In this function, I yield 20 pages request, so the spider will crawl all these 20 pages and process each as we defined in process_item function.
+If you want to know more about spider, [here](http://doc.scrapy.org/en/1.0/topics/spiders.html) is the documentation.
+
+## Modify settings.py.
+
+Finally, we come to the last part: settings. In this file, we only need to make some configurations of our project. Here I only need to tell the project I have a pipeline and I want my items go through the pipeline after they are fed with values from the web page. So my settings looks like this:
+
+	# -*- coding: utf-8 -*-
+	from scrapy.settings.default_settings import ITEM_PIPELINES
+	
+	# Scrapy settings for amazon project
+	#
+	# For simplicity, this file contains only settings considered important or
+	# commonly used. You can find more settings consulting the documentation:
+	#
+	#     http://doc.scrapy.org/en/latest/topics/settings.html
+	#     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
+	#     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+	
+	BOT_NAME = 'amazon'
+	
+	SPIDER_MODULES = ['amazon.spiders']
+	NEWSPIDER_MODULE = 'amazon.spiders'
+	
+	ITEM_PIPELINES = {
+	    'amazon.pipelines.AmazonPipeline': 0
+	    }
+If you want to learn more about settings, [here](http://doc.scrapy.org/en/1.0/topics/settings.html) is the documentaion.
+
+Above is how I implemented the scrapy project, the intact code is on my [Github Page](https://github.com/sunshineatnoon/Scrapy-Amazon-Sqlite)
+
 [1]: https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/amazon-website.png
