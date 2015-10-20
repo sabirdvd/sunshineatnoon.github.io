@@ -26,6 +26,7 @@ sudo yum install python-pip
 ## Start a project.
 
 To start a scrapy project, cd to where you want to put the project and then run:
+
 ```bash
 scrapy startproject amazon
 ```
