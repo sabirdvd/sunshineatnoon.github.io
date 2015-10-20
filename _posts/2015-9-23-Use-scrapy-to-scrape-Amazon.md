@@ -173,7 +173,7 @@ def start_requests(self):
 	for i in range(2,20):
 			yield scrapy.Request("http://www.amazon.com/s/ref=lp_360832011_pg_2?rh=n%3A7141123011%2Cn%3A10445813011%2Cn%3A9479199011%2Cn%3A360832011&page="+str(i)+"&bbn=10445813011&ie=UTF8&qid=1442910987",self.parse)
 ```
-The start_requests function is just as the parse function, it is a pre-defined function in scrapy, thus we can't change its name. In this function, I yield 20 pages request, so the spider will crawl all these 20 pages and process each as we defined in process_item function.
+The `start_requests` function is just as the parse function, it is a pre-defined function in scrapy, thus we can't change its name. In this function, I yield 20 pages request, so the spider will crawl all these 20 pages and process each as we defined in process_item function.
 If you want to know more about spider, [here](http://doc.scrapy.org/en/1.0/topics/spiders.html) is the documentation.
 
 ## Modify settings.py.
