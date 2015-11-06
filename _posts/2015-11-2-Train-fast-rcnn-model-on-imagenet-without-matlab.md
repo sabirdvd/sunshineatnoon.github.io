@@ -102,7 +102,10 @@ Training is easy, just run this command under `$FRCNN_ROOT`:
 ```
 For me, it took me about 0.44s for each iteration for 40000 iterations. So the total time for training is about 5 hours. 
 ## See Training Result
-I don't really want to test the trained model for an accuracy, but instead view its performance intuitively. So just copy the trained model in `$FRCNN_ROOT/output/default/train/caffenet_fast_rcnn_iter_40000.caffemodel` to `/data/fast_rcnn_models/ ` (Don't forget to backup the old one). Then run `./tools/demo.py` under `$FRCNN_ROOT` to see how our trained model works. Of course, changes need to be made in demo.py file to use dlib's selective search and the trained model. You can find mine [here](https://github.com/sunshineatnoon/fast-rcnn/blob/master/tools/demo.py) for a reference.
+I don't really want to test the trained model for an accuracy, but instead view its performance intuitively. 
+So I just copy the trained model in `$FRCNN_ROOT/output/default/train/caffenet_fast_rcnn_iter_40000.caffemodel` to `/data/fast_rcnn_models/ ` (Don't forget to backup the old one). Then run `./tools/demo.py` under `$FRCNN_ROOT` to see how our trained model works. Of course, changes need to be made in demo.py file to use dlib's selective search and the trained model. You can find mine [here](https://github.com/sunshineatnoon/fast-rcnn/blob/master/tools/demo.py) for a reference.
 ## Reference
+
 [1] [https://github.com/zeyuanxy/fast-rcnn/tree/master/help/train](https://github.com/zeyuanxy/fast-rcnn/tree/master/help/train)
+
 [2] [http://www.cnblogs.com/louyihang-loves-baiyan/p/4885659.html?utm_source=tuicool&utm_medium=referral](http://www.cnblogs.com/louyihang-loves-baiyan/p/4885659.html?utm_source=tuicool&utm_medium=referral)
