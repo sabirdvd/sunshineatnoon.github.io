@@ -88,6 +88,7 @@ To run this file, just run `python generate_bbox.py`. Then you will find a train
 ## Modify Prototxt Files
 Sine we only have 3 classes(including background class), we need to change the network structure. For me, I trained this model on the pre-trained caffenet model. So I need to change `$FRCNN_ROOT/models/CaffeNet/train.prototxt` to fit my dataset.
 
+
 - For the input layer, we need to change input class to 3: `param_str: "'num_classes': 3"`
 - For the cls_score layer, we need to change output class to 3: `num_output: 3`
 - For the bbox_pred layer, we need to change output to 3*4=12: `num_output: 12`
