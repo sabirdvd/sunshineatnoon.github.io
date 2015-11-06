@@ -81,7 +81,7 @@ Since I don't have MATLAB installed, so instead I use [dlib](http://dlib.net/)'s
 imagenet_path = '/path/to/imagnet/data/Images/'
 names = '/path/to/imagenet/data/ImageSets/test.txt'
 ```
-To run this file, just run python `generate_bbox.py`. Then you will find a train.mat file in the same folder, just copy the train.mat file to imagenet/data/.
+To run this file, just run `python generate_bbox.py`. Then you will find a train.mat file in the same folder, just copy the train.mat file to imagenet/data/.
 ## Modify Prototxt Files
 Sine we only have 3 classes(including background class), we need to change the network structure. For me, I trained this model on the pre-trained caffenet model. So I need to change `$FRCNN_ROOT/models/CaffeNet/train.prototxt` to fit my dataset.
 - For the input layer, we need to change input class to 3: `param_str: "'num_classes': 3"`
