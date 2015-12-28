@@ -8,7 +8,7 @@ I have been bumping my head to the wall for days to implement this function. Fro
 ## Install AFNetwork
 [AFNetwork](https://github.com/AFNetworking/AFNetworking) is a popular networking library for iOS and Mac OS X. With the help of this framework, it is easy to send a POST request from our IOS app to any web server, including a Django server. Installing is easy, just follow the official steps, here I make a summary:
 
-- Install cocoapods: `gem install cocoapods`
+- Install cocoapods: ```gem install cocoapods```
 - Setup cocoapods: `pod setup`
 - Create a new Xcode project and go to the folder where your YourProjectName.xcodeproj file is, then create a Podfile:  `touch Podfile` 
 - Add these lines to the file, I am currently working with IOS 9 and AFNetowrk 2.5, feel free to change it to any IOS version you are working with: 
@@ -106,18 +106,18 @@ A special attension should be paid to the csrf, since this is only a pretty simp
 Now let's set up our server:
 
 ```
-$: cd minimal-django-file-upload-example/src/for_django_1-8/myproject/
+$: cd myproject/
 $: python manage.py migrate
 $: python manage.py runserver 0.0.0.0:8000
 ```
-Now if you can visit your server at `http://0.0.0.0:8000/myapp/list/` locally or `http://your.server's.ip.address:8000/myapp/list/` from another computer. Of course you will get the error `The view myproject.myapp.views.list didn't return an HttpResponse object. It returned None instead.`. This is because we only return a number instead of a html file, but it at least tells us that our site is recheable.
+Now if you can visit your server at `http://0.0.0.0:8000/myapp/list/` locally or `http://your.server.ip.address:8000/myapp/list/` from another computer. Of course you will get the error `The view myproject.myapp.views.list didn't return an HttpResponse object. It returned None instead.`. This is because we only return a number instead of a html file, but it at least tells us that our site is recheable.
 
 What about our IOS APP? Let's try. Run the app and click the upload button, then we see this output from the log:
 
 ```
 2015-12-28 21:30:21.648 uploadTest[6090:210046] Success: {"Status": 0} ***** 0
 ```
-This means we have successfully send our POST request to the server. So does our server successfully receive the image? We can check this path `minimal-django-file-upload-example/src/for_django_1-8/myproject/media/documents/2015/12/28`. See, let's our image!
+This means we have successfully send our POST request to the server. So does our server successfully receive the image? We can check this path `myproject/media/documents/2015/12/28`. See, let's our image!
 ![Image of upload file](https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/upload_django_ios1.png)
 
 Should you encounter this problem:`Transport Security policy requires the use of a secure connection.`, see [here](http://stackoverflow.com/questions/32631184/the-resource-could-not-be-loaded-because-the-app-transport-security-policy-requi) for a solution.
