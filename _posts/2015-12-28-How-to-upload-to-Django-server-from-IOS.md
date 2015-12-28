@@ -108,7 +108,7 @@ A special attension should be paid to the csrf, since this is only a pretty simp
 Now let's set up our server:
 
 ```
-$: cd minimal-django-file-upload-example/src/for_django_1-8/myproject/
+$: cd myproject/
 $: python manage.py migrate
 $: python manage.py runserver 0.0.0.0:8000
 ```
@@ -118,7 +118,7 @@ What about our IOS APP? Let's try. Run the app and click the upload button, then
 ```
 2015-12-28 21:30:21.648 uploadTest[6090:210046] Success: {"Status": 0} ***** 0
 ```
-This means we have successfully send our POST request to the server. So does our server successfully receive the image? We can check this path `minimal-django-file-upload-example/src/for_django_1-8/myproject/media/documents/2015/12/28`. See, let's our image!
+This means we have successfully send our POST request to the server. So does our server successfully receive the image? We can check this path `myproject/media/documents/2015/12/28`. See, let's our image!
 
 
 Should you encounter this problem:`Transport Security policy requires the use of a secure connection.`, see [here](http://stackoverflow.com/questions/32631184/the-resource-could-not-be-loaded-because-the-app-transport-security-policy-requi) for a solution.
