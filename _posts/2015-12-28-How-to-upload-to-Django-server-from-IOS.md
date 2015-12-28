@@ -137,7 +137,7 @@ self.imgViewController.image = img;
 ```
 
 ## Code 
-I uploaded all the code to my [GitHub]().
+All codes are avilable on my [GitHub Repo]().
 
 ## Reference
 
