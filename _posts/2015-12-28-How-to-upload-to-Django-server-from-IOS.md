@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 layout: post
 title: How to upload image from IOS to Django server
@@ -58,7 +57,11 @@ I want to make few notes about the objective-c code above:
 - you need to double check that the paramters and file name your specify matches what you define in the server side, other wise the form we post to the server will be invalid. For instance, my DocumentForm in the server side is defined like below, thus I have `@{@"name":@"sunshineatnoon"}` in the paramters and named my imageData to be docfile: `[formData appendPartWithFileData:imageData name:@"docfile" fileName:@"photo.jpg" mimeType:@"image/jpg"];`
 
 ```
-from django import formsclass DocumentForm(forms.Form):    #docfile = forms.FileField()    name = forms.CharField(max_length=100)    docfile = forms.FileField()
+from django import forms
+class DocumentForm(forms.Form):
+    #docfile = forms.FileField()
+    name = forms.CharField(max_length=100)
+    docfile = forms.FileField()
 ```
 
    
@@ -69,11 +72,35 @@ from django import formsclass DocumentForm(forms.Form):    #docfile = forms.Fi
 ######First we need to change the form so we can upload a string and an image to the server, change `forms.py` to this:
 
 ```
-from django import formsclass DocumentForm(forms.Form):    #docfile = forms.FileField()    name = forms.CharField(max_length=100)    docfile = forms.FileField()
+from django import forms
+class DocumentForm(forms.Form):
+    #docfile = forms.FileField()
+    name = forms.CharField(max_length=100)
+    docfile = forms.FileField()
 ```
 Then we need to define what we want to return to our IOS App, for now, I will just return 1 if Django server receives valid form or 0 if the form is invalid. So our `views.py` is like this:
 
-```from myproject.myapp.models import Documentfrom myproject.myapp.forms import DocumentFormfrom django.http import HttpResponseimport jsonfrom django.views.decorators.csrf import csrf_exempt@csrf_exemptdef list(request):    # Handle file upload    if request.method == 'POST':        form = DocumentForm(request.POST, request.FILES)        if form.is_valid():            newdoc = Document(docfile=request.FILES['docfile'])            newdoc.save()            # Redirect to the document list after POST            return HttpResponse(json.dumps({"Status": 0}, sort_keys=True))        else:            return HttpResponse(json.dumps({"Status": 1}, sort_keys=True))
+```
+from myproject.myapp.models import Document
+from myproject.myapp.forms import DocumentForm
+from django.http import HttpResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+
+def list(request):
+    # Handle file upload
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = Document(docfile=request.FILES['docfile'])
+            newdoc.save()
+
+            # Redirect to the document list after POST
+            return HttpResponse(json.dumps({"Status": 0}, sort_keys=True))
+        else:
+            return HttpResponse(json.dumps({"Status": 1}, sort_keys=True))
+
 ```
 A special attension should be paid to the csrf, since this is only a pretty simple demo, I just disable csrf, otherwise the server will decline to accept the POST request unless it provides a valid csrf.
 
