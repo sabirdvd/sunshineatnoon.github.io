@@ -113,6 +113,7 @@ $: python manage.py runserver 0.0.0.0:8000
 Now if you can visit your server at `http://0.0.0.0:8000/myapp/list/` locally or `http://your.server's.ip.address:8000/myapp/list/` from another computer. Of course you will get the error `The view myproject.myapp.views.list didn't return an HttpResponse object. It returned None instead.`. This is because we only return a number instead of a html file, but it at least tells us that our site is recheable.
 
 What about our IOS APP? Let's try. Run the app and click the upload button, then we see this output from the log:
+
 ```
 2015-12-28 21:30:21.648 uploadTest[6090:210046] Success: {"Status": 0} ***** 0
 ```
@@ -136,7 +137,7 @@ self.imgViewController.image = img;
 Here is what it looks like in my app:
 ![Image of upload file](https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/upload_ios_django2.png)
 ## Code 
-I uploaded all the code to my [GitHub]().
+All the code is available on my [GitHub Repo](https://github.com/sunshineatnoon/IOS_UPLOAD_TO_DJANGO_DEMO/tree/master).
 
 ## Reference
 
