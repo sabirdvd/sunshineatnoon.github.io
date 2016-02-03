@@ -4,23 +4,8 @@ title: Notes on MLP Backprop
 published: true
 use_math: true
 ---
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    tex2jax: {
-      inlineMath: [ ['$','$'], ['\(', '\)'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true,
-    }
-  });
-</script>
-<script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+<script type="text/javascript"  
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>  
 
 Thanks to this great [tutorial](http://cs231n.github.io/neural-networks-case-study/), I finally have some clues about how backpropagation works in multi-layer perceptrons and want to write them down while my memories are still fresh. 
 
