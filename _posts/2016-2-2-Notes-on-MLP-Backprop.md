@@ -4,6 +4,23 @@ title: Notes on MLP Backprop
 published: true
 use_math: true
 ---
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\(', '\)'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true,
+    }
+  });
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 Thanks to this great [tutorial](http://cs231n.github.io/neural-networks-case-study/), I finally have some clues about how backpropagation works in multi-layer perceptrons and want to write them down while my memories are still fresh. 
 
@@ -33,7 +50,10 @@ The feedforward pass is straightforward to understand and implement. At every la
 
   ```
   def Forward(self,X):
-       Hidden = np.maximum(0,X.dot(self.W1) + self.b1)     score = Hidden.dot(self.W2) + self.b2     return Hidden,score
+  
+     Hidden = np.maximum(0,X.dot(self.W1) + self.b1)
+     score = Hidden.dot(self.W2) + self.b2
+     return Hidden,score
   ```
 ## Normalize scores into probabilities
 
@@ -59,9 +79,14 @@ $$L = \frac{1}{N}{\sum{L_i}} + \frac{1}{2}{\lambda}({W_1^2+W_2^2}) $$
 #### Implementation
 
 ```
-correct_logprobs = -np.log(probs[range(N),y])data_loss = np.sum(correct_logprobs)/Nreg_loss = 0.5 * reg * (np.sum(self.W1 * self.W1) + np.sum(self.W2*self.W2))loss = data_loss + reg_loss
-```
-In the above implementation, the correct_logprobs is a (C,1) matrix, with each row indicating the predicted probability for the correct class of this sample, i.e. the $p_{y_i}$ in the equation above.
+correct_logprobs = -np.log(probs[range(N),y])
+data_loss = np.sum(correct_logprobs)/N
+reg_loss = 0.5 * reg * (np.sum(self.W1 * self.W1) + np.sum(self.W2*self.W2))
+loss = data_loss + reg_loss
+
+```
+
+In the above implementation, the correct_logprobs is a (C,1) matrix, with each row indicating the predicted probability for the correct class of this sample, i.e. the $p_{y_i}$ in the equation above.
 
 ## Gradient
 Here is what backprobagation comes in. The key for backprobagation is the <strong>chain rule</strong>. From back to front, we regard each operation as a gate, a gate receives a bunch of gradients and pushes them back to its input varibles. For instance, the addition gate below receives a gradient and distribute this gradient to all its input varibles equally. More informations about different gates can be found [here](http://cs231n.github.io/optimization-2/).
@@ -84,9 +109,21 @@ The equations above may seem intimatating, but they are nothing more than the re
 
 #### Implementation
 ```
-dscores = probsdscores[range(N),y] -= 1dscores /= N
-dW2 = Hidden.T.dot(dscores) + reg * self.W2db2 = np.sum(dscores,axis=0,keepdims=True)dHidden = dscores.dot(self.W2.T)dHidden[Hidden <= 0] = 0 #Back prop ReLUdW1 = X.T.dot(dHidden) + reg * self.W1db1 = np.sum(dHidden,axis=0,keepdims=True)
-```
+dscores = probs
+dscores[range(N),y] -= 1
+dscores /= N
+
+
+dW2 = Hidden.T.dot(dscores) + reg * self.W2
+db2 = np.sum(dscores,axis=0,keepdims=True)
+
+dHidden = dscores.dot(self.W2.T)
+dHidden[Hidden <= 0] = 0 #Back prop ReLU
+
+dW1 = X.T.dot(dHidden) + reg * self.W1
+db1 = np.sum(dHidden,axis=0,keepdims=True)
+
+```
 Above implementation is a straightforward translation from equations to code. Special attention maybe needed to the fourth line of the code, which pushes gradient through the ReLU gate. The ReLU is just a max gate, which only distributes one to its maximum input and zero to all other inputs.
 
 ## Reference
