@@ -28,6 +28,7 @@ The feedforward pass is straightforward to understand and implement. At every la
 #### Equations
 
 $$ Hidden = ReLU(X*W1 + b1)$$
+
 $$ scores = Hidden*W2 + b2 $$
 
 #### Implementation
