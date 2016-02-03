@@ -127,6 +127,7 @@ Above implementation is a straightforward translation from equations to code. Sp
 
 [3] [http://neuralnetworksanddeeplearning.com/chap2.html](http://neuralnetworksanddeeplearning.com/chap2.html)
 
+
 ##Code
 
 The code is available on my [GitHub](https://github.com/sunshineatnoon/Deep-Learning-Practice). It gets about 93% accuracy on MNIST.
