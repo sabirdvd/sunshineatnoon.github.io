@@ -24,6 +24,7 @@ In this post, I will mainly focuse on implementing a simple two-layer perceptron
 ## Feedforward Pass
 
 The feedforward pass is straightforward to understand and implement. At every layer, we just multiply the inputs with weights, add a bias and go through an activation function. Here I will use [Rectified Linear Unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks).
+
 #### Equations
 
 - Hidden = ReLU(X*W1 + b1)
@@ -121,6 +122,7 @@ db1 = np.sum(dHidden,axis=0,keepdims=True)
 Above implementation is a straightforward translation from equations to code. Special attention maybe needed to the fourth line of the code, which pushes gradient through the ReLU gate. The ReLU is just a max gate, which only distributes one to its maximum input and zero to all other inputs.
 
 ## Reference
+
 [1] [http://cs231n.github.io/neural-networks-case-study/](http://cs231n.github.io/neural-networks-case-study/)
 
 [2] [http://cs231n.github.io/optimization-2/](http://cs231n.github.io/optimization-2/)
