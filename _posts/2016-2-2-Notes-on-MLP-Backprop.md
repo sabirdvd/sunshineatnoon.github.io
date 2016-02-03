@@ -77,6 +77,8 @@ correct_logprobs = -np.log(probs[range(N),y])data_loss = np.sum(correct_logprob
 
 ## Gradient
 Here is what backprobagation comes in. The key for backprobagation is the <strong>chain rule</strong>. From back to front, we regard each operation as a gate, a gate receives a bunch of gradients and pushes them back to its input varibles. For instance, the addition gate below receives a gradient and distribute this gradient to all its input varibles equally. More informations about different gates can be found [here](http://cs231n.github.io/optimization-2/).
+
+![Addition Gate](https://raw.githubusercontent.com/sunshineatnoon/sunshineatnoon.github.io/master/images/mlp.png)
 #### Equations
 $$L_i = -log(\frac{e^{s_{y_i}}}{\sum{e^{s_j}}}) \Longrightarrow \frac{\partial L_i}{\partial s_k} = \frac{e^{s_k}}{\sum{e^{s_j}}} - {1({y_i == k})}$$
 
