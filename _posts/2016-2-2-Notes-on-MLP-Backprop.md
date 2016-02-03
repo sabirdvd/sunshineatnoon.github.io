@@ -23,7 +23,7 @@ In this post, I will mainly focuse on implementing a simple two-layer perceptron
 
 ## Feedforward Pass
 
-The feedforward pass is straightforward to understand and implement. At every layer, we just multiply the inputs with weights, add a bias and go through an activation function. Here I will use [Rectified Linear Unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks).
+The feedforward pass is straightforward to understand and implement. At every layer, we just multiply the inputs with weights, add a bias and go through an activation function. Here I will use [Rectified Linear Unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)).
 
 #### Equations
 
@@ -32,13 +32,13 @@ The feedforward pass is straightforward to understand and implement. At every la
 
 #### Implementation
 
-  ```
-  def Forward(self,X):
+```
+def Forward(self,X):
   
-     Hidden = np.maximum(0,X.dot(self.W1) + self.b1)
-     score = Hidden.dot(self.W2) + self.b2
-     return Hidden,score
-  ```
+   Hidden = np.maximum(0,X.dot(self.W1) + self.b1)
+   score = Hidden.dot(self.W2) + self.b2
+   return Hidden,score
+```
   
 ## Normalize scores into probabilities
 
@@ -130,7 +130,7 @@ Above implementation is a straightforward translation from equations to code. Sp
 [3] [http://neuralnetworksanddeeplearning.com/chap2.html](http://neuralnetworksanddeeplearning.com/chap2.html)
 
 
-##Code
+## Code
 
 The code is available on my [GitHub](https://github.com/sunshineatnoon/Deep-Learning-Practice). It gets about 93% accuracy on MNIST.
 
