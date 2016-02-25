@@ -7,6 +7,7 @@ published: true
 
 
 I have been bumping my head to the wall for days to implement this function. From GitHub to StackOverFlow, finally, it worked like a charm. So I decided to keep a note in case it might be helpful to others.
+
 ## Install AFNetwork
 [AFNetwork](https://github.com/AFNetworking/AFNetworking) is a popular networking library for iOS and Mac OS X. With the help of this framework, it is easy to send a POST request from our IOS app to any web server, including a Django server. Installing is easy, just follow the official steps, here I make a summary:
 
