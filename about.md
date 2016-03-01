@@ -3,15 +3,14 @@ layout: page
 title: About
 permalink: /about/
 ---
+### Research Interests
+Computer vision, machine learning and deep learning.
 
-I am currently a student in THU, my search interests are computer vision and machine learning.
-My Chinese blog : [Click here](http://www.cnblogs.com/sunshineatnoon/)
+### Other Interests
+Psycology, Cycling
 
-### More Information
-I am a terrible writer. I love English, I like to hear it, read it and speak it. But the primary goal for this blog is to serve as a memo for me, so the next time I want to fix some bugs I solved before, I don't have to go through the nesting search for answers again. Also, I'd like to see my own progress as time passes by. Thus, this little should be enough for me now.
+### Chinese Blog
+[Click here](http://www.cnblogs.com/sunshineatnoon/)
 
 ### Contact me
-
 [xuetingli@foxmail.com](mailto:email@domain.com)
-
-#### I am currently looking for PhD postition in computer vision and deep learning area. Here is my [curriculum vitae](http://sunshineatnoon.github.io/docs/cv.pdf)
