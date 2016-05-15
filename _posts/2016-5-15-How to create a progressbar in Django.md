@@ -18,20 +18,26 @@ Although Celery is a neat and Convinient framework, its documentation is not tha
 * Celery 3.1.19
 
 # Prerequisites
-First of all, you need a Django project, mine is called `celery_try`
+
+First of all, you need a Django project, mine is called `celery_try`.
+
 ```
 django-admin startproject celery_try
 python manage.py makemigrations
 python manage.py migrate
 ```
+
 Then add those lines in your settings.py file:
+
 ```
 BROKER_URL = 'amqp://guest:guest@localhost//'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 ```
+
 Those lines tell Celery we will use RabbitMQ as our message broker and we accpet json in our broker. Next create a file 'celery.py' in the folder of our website and input this:
+
 ```
 from __future__ import absolute_import
 import os
@@ -54,14 +60,19 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 def debug_task(self):
     print("Request: {0!r}".format(self.request))
 ```
+
 Those lines tell Celery that we will use the settings in setting.py we just defined.
 
 # Tasks in Celery
+
 Now we can start an app and define some tasks:
+
 ```
 django-admin startapp testapp
 ```
+
 Creat a file called tasks.py in your app's folder, all tasks shall be defined in this file. Here for demo purpose, I will define a dumy task which calculates n times discrete Fourier Transforms:
+
 ```
 from celery import shared_task,current_task
 from numpy import random
@@ -81,21 +92,28 @@ def fft_random(n):
                                       meta={'process_percent': process_percent})
     return random.random()
 ```
+
 Above code is self expalainary except for this line:
+
 ```
 current_task.update_state(state='PROGRESS',meta={'process_percent': process_percent})
 ```
+
 This is actually a custom state in Celery, by define this state, we are able to pass the percentage of task we have processed to the message broker every 30 iterations, thus we can use this message and create a progress bar. More details about custom state can be found on [Celery documentation](http://docs.celeryproject.org/en/latest/userguide/tasks.html#custom-states). One thing to notice is that you don't want to pass too many messages to your broker, otherwise it may gets blocked, so we only pass a message every 30 iterations.
 
 # Call tasks in Django
+
 Here I created a page index.html that includes a submit button, when the user enters a number (say 10000) and clicks the "submit" button, Celery will call one of its workers and say: "Hey buddy, do 10000 times discrete Fourier Transforms and report the progress to me!". So how to we call Celery worker in Django? Well, this maybe the simplest part of this project, just use these two lines:
+
 ```
 from .tasks import fft_random
 job = fft_random.delay(int(n))
 ```
+
 Now the happy worker will do this task at backend.
 
 # Progress Bar
+
 Now the worker is working, and in the fft_random tasks we report the percentage of task progress every 30 iterations. But how do we show it in the progress bar? We will use javescript! So in my `show_t.html` file, which is a pages shows progress of the task, I defined a javascript polling function like this:
 
 ```
@@ -143,6 +161,7 @@ Now the worker is working, and in the fft_random tasks we report the percentage 
   })();
 </script>
 ```
+
 Long story short, this piece javascript code grab  `task_id` from Django and use send this `task_id` through a POST request to a Django view call `poll_state`. This `poll_state` function checks task's state and return them in a json string to javascript. Then javascript can do whatever it wants with the status: showing status, update a progress bar ... Here is how the `poll_state` function in `views.py`:
 
 ```
@@ -165,6 +184,7 @@ def poll_state(request):
 ```
 
 # The Whole Blueprint
+
 Although I tried my best to explain details about this Django project, there are still nasty details you may want to consult from the code. So here is how the website looks like:
 
 ![image](https://raw.githubusercontent.com/sunshineatnoon/Django-Celery-Example/master/images/2.png)
@@ -180,9 +200,11 @@ Here is what the progress looks like.
 And here shows the task is done.
 
 # Code
+
 The code is under MIT licence on my [GitHub](https://github.com/sunshineatnoon/Django-Celery-Example). A warning is that it doesn't work on Safari, but it works well on FireFox and Chrome.
 
 # Reference
+
 [1] [https://www.youtube.com/watch?v=Ip1OLq_-c2w](https://www.youtube.com/watch?v=Ip1OLq_-c2w)
 
 [2] [https://github.com/NAThompson/learn_celery](https://github.com/NAThompson/learn_celery)
