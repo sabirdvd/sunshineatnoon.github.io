@@ -5,6 +5,7 @@ published: true
 ---
 
 In my latest project, I created a Django website and use it to process long tasks for users, a problem is that the process time is loooong and we need a progress bar so that the users won't think the website is dead or so. After some googling, I found [Celery](http://www.celeryproject.org), which is an asynchronous task queue/job queue based on distributed message passing. Thus, I was able to achieve these functionalities for my website:
+
 1. Start a worker in Celery to procress the long task;
 2. Read message from Celery about the progress of my task;
 3. Pass the message to Javescript and show the progress with a progress bar.
@@ -103,7 +104,7 @@ This is actually a custom state in Celery, by define this state, we are able to 
 
 # Call tasks in Django
 
-Here I created a page index.html that includes a submit button, when the user enters a number (say 10000) and clicks the "submit" button, Celery will call one of its workers and say: "Hey buddy, do 10000 times discrete Fourier Transforms and report the progress to me!". So how to we call Celery worker in Django? Well, this maybe the simplest part of this project, just use these two lines:
+Here I created a page index.html that includes a submit button, when the user enters a number (say 10000) and clicks the "submit" button, Celery will call one of its workers and say: "Hey buddy, do 10000 times discrete Fourier Transforms and report the progress to me!". So how do we call Celery worker in Django? Well, this maybe the simplest part of this project, just use these two lines:
 
 ```
 from .tasks import fft_random
